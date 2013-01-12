@@ -5,3 +5,4 @@ Gemfile.lock
 pkg/*
 test/dummy
 test/dummy_hooks/after_migrate.rb
+spec/dummy
