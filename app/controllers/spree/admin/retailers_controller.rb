@@ -1,7 +1,7 @@
 class Spree::Admin::RetailersController < Spree::Admin::ResourceController
 
   before_filter :get_locations, :except => [:index, :destroy]
-  
+
 private
 
   def collection
@@ -12,8 +12,8 @@ private
   end
 
   def get_locations
-    @countries = Spree::Country.all.collect{|country| country.name }.sort
+    @countries = Spree::Country.all.map(&:name).sort
     @states = Spree::State.where(:country_id => 214).order(:name).collect{|state| [state.name, state.abbr] }
   end
-  
+
 end
