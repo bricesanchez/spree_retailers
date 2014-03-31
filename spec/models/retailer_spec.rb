@@ -1,21 +1,21 @@
-require 'test_helper'
+require 'spec_helper'
 
-class Spree::RetailerTest < ActiveSupport::TestCase
+describe Spree::Retailer do
    
-  should belong_to(:retailer_type)
+  # should belong_to(:retailer_type)
    
-  should validate_presence_of(:name)
-  should validate_presence_of(:address)
-  should validate_presence_of(:city)
+  # should validate_presence_of(:name)
+  # should validate_presence_of(:address)
+  # should validate_presence_of(:city)
   
   context "a new retailer" do
   
-    setup do
+    before do
       @retailer = Spree::Retailer.new
     end
     
-    should "validate email" do 
-      assert !@retailer.valid?
+    it "validate email" do 
+      assert !@retailer.valid?.should be_false
       # email isn't required
       assert !@retailer.errors.include?(:email)
       
@@ -30,26 +30,26 @@ class Spree::RetailerTest < ActiveSupport::TestCase
       assert !@retailer.errors.include?(:email)
     end
     
-    should "require state in the US" do
+    it "require state in the US" do
       @retailer.country = "United States"
       assert !@retailer.valid?      
       assert @retailer.errors.include?(:state)
     end
     
-    should "not require state outside of the US" do
+    it "not require state outside of the US" do
       @retailer.country = "Switzerland"
       assert !@retailer.valid?      
       assert !@retailer.errors.include?(:state)      
     end
     
     
-    should "require zip code in the US" do
+    it "require zip code in the US" do
       @retailer.country = "United States"
       assert !@retailer.valid?      
       assert @retailer.errors.include?(:zipcode)      
     end
     
-    should "not require zip code outside of the US" do
+    it "not require zip code outside of the US" do
       @retailer.country = "Switzerland"
       assert !@retailer.valid?      
       assert !@retailer.errors.include?(:zipcode)      
@@ -60,18 +60,18 @@ class Spree::RetailerTest < ActiveSupport::TestCase
   
   context "an existing retailer" do
   
-    setup do
+    before do
       @retailer = retailers(:one)
     end
         
-    should "normalize url field" do
+    it "normalize url field" do
       @retailer.url = "http://example.com"
       assert_equal "http://example.com", @retailer.url
       @retailer.url = "example.com"
       assert_equal "http://example.com", @retailer.url
     end
     
-    should "check has_url?" do
+    it "check has_url?" do
       @retailer.url = nil
       assert !@retailer.has_url?, "has_url? should be false on nil"
       
@@ -85,20 +85,20 @@ class Spree::RetailerTest < ActiveSupport::TestCase
       assert @retailer.has_url?, "has_url? should be true on real full url"
     end
     
-    should "keep https on url" do
+    it "keep https on url" do
       url = "https://example.com"
       @retailer.url = url
       assert_equal url, @retailer.url
     end
     
-    should "have empty optional values" do
+    it "have empty optional values" do
       [:address2, :phone, :email].each do |property|
         @retailer.send("#{property}=", nil)
         assert !@retailer.send("has_#{property}?")
       end
     end
       
-    should "have optional values" do    
+    it "have optional values" do    
       @retailer.address2 = "Suite 2"
       assert @retailer.has_address2?
       
@@ -113,11 +113,11 @@ class Spree::RetailerTest < ActiveSupport::TestCase
   
   context "a non-geocoded retailer" do
   
-    setup do
+    before do
       @retailer = retailers(:one)
     end
   
-    should "get geocoded" do
+    it "get geocoded" do
       assert !@retailer.geocoded?
       @retailer.address = "111 Cabrillo Blvd"
       @retailer.valid?

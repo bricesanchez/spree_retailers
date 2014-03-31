@@ -25,17 +25,4 @@ RSpec.configure do |config|
   config.include Spree::Core::UrlHelpers
   config.mock_with :rspec
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
-  config.use_transactional_fixtures = true
 end
-
-
-# module FixturesHelper  
-#   def self.included(base)
-#     base.class_eval do
-#       self.fixture_path = File.expand_path("../fixtures/spree", __FILE__)
-#       set_fixture_class :retailer_types => Spree::RetailerType
-#       set_fixture_class :retailers => Spree::Retailer
-#       fixtures :all
-#     end
-#   end  
-# end
