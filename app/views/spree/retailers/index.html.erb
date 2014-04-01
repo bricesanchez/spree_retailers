@@ -10,11 +10,11 @@
     </ul>
   <% end %>  
 </div>
-     
+
+<% if @retailers.present? %>
 <div class="right" data-hook="retailers-index">
-  <% unless !@retailers || @retailers.empty? %>
-    <%= render 'list', :retailers => @retailers %> 
-  <% end %>
+  <%= render 'list', :retailers => @retailers %> 
 </div>
+<% end %>
 
 <div class="clear">&nbsp;</div>
