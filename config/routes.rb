@@ -5,7 +5,6 @@ Spree::Core::Engine.routes.draw do
     resources :retailers
   end
 
-  get '/retailers/:retailer_type_id' => 'retailers#index', :as => :retailer_type, :constraints => { :retailer_type_id => /.*/ }
-  resources :retailers, :only => :index
+  get '/retailers(/:retailer_type_id)' => 'retailers#index', :as => :retailer_type
   
 end
