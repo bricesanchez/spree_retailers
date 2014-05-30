@@ -17,7 +17,7 @@ private
   def collection
     params[:q] ||= {}
     params[:q][:meta_sort] ||= "name asc"
-    @search = Spree::RetailerType.search(params[:q])
+    @search = Spree::RetailerType.ransack(params[:q])
     @collection = @search.result.page(params[:page]).per(Spree::Config[:orders_per_page])
   end
 

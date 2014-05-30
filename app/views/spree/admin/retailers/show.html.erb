@@ -1,4 +1,12 @@
-<h1><%= @retailer.name %></h1>
+<% content_for :page_title do %>
+  <%= Spree.t(:retailer) %>: <%= @retailer.name %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <li><%= button_link_to Spree.t(:back), session[:return_to] || admin_retailers_url, :icon => 'icon-arrow-left' %></li>
+<% end %>
+
+<%= render :partial => 'spree/admin/shared/retailer_sub_menu' %>
 
 <%= image_tag @retailer.logo.url if @retailer.has_logo? %>
 
@@ -42,10 +50,5 @@
     <br/>
     <b>Provider:</b> <%= @retailer.geokit_provider %>
   </p>
-<% end %>
-
-
-<p>
-  <%= link_to_edit @user %> &nbsp;
-  <%= link_to t('back'), collection_url %>
-</p>
+<% end %>  
+  

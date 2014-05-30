@@ -1,72 +1,84 @@
-<div class='toolbar'>
-  <ul class='actions'>
-    <li>
-      <p><%= button_link_to "New Retailer", new_object_url, :icon => 'add' %></p>
-    </li>
-  </ul>
-  <br class='clear' />
-</div>
 
+<% content_for :page_title do %>
+  <%= Spree.t(:listing_retailers) %>
+<% end %>
 
-<h1>Listing Retailers</h1>
+<% content_for :page_actions do %>
+  <li>
+    <%= button_link_to Spree.t(:new_retailer), new_object_url, :icon => 'icon-plus', :id => 'admin_new_retailer_link' %>
+  </li>
+<% end %>
 
-<table class="index">
+<%= render :partial => 'spree/admin/shared/retailer_sub_menu' %>
+
+<table class="index" id="listing_retailers" data-hook>
+  <colgroup>
+    <col style="width: 30%">
+    <col style="width: 10%">
+    <col style="width: 15%">
+    <col style="width: 15%">
+    <col style="width: 15%">
+    <col style="width: 15%">
+  </colgroup>
   <thead>
-	<tr>
-    	<th><%= sort_link @search, :name %></th>
-    	<th><%= sort_link @search, :retailer_type %></th>
-    	<th><%= sort_link @search, :state %></th>
-    	<th><%= sort_link @search, :email %></th>
-    	<th><%= sort_link @search, :phone %></th>
-    	<th><%= t("action") %></th>
-	</tr>
+    <tr data-hook="admin_retailers_index_headers">
+      <th><%= sort_link @search,:name, Spree.t(:name), {}, {:title => 'retailer_name'} %></th>
+      <th><%= sort_link @search,:retailer_type, Spree.t(:retailer_type), {}, {:title => 'retailer_type'} %></th>
+      <th><%= sort_link @search,:state, Spree.t(:state), {}, {:title => 'state'} %></th>
+      <th><%= sort_link @search,:email, Spree.t(:email), {}, {:title => 'email'} %></th>
+      <th><%= sort_link @search,:phone, Spree.t(:phone), {}, {:title => 'phone'} %></th>
+      <th data-hook="admin_retailers_index_header_actions" class="actions"></th>
+    </tr>
   </thead>
   <tbody>
-    <%- @collection.each do |retailer|%>
-    <tr id="<%= dom_id retailer %>">
-      <td width="200px"><%= link_to retailer.name, object_url(retailer) %></td>
-      <td><%= retailer.retailer_type.nil? ? "n/a" : retailer.retailer_type.name %></td>
-      <td><%= retailer.state %></td>
-      <td><%= retailer.email %></td>
-      <td><%= number_to_phone retailer.phone %></td>
-      <td class="actions">
-      	<%= link_to_edit retailer %> &nbsp;
-      	<%= link_to_delete retailer %> &nbsp;
-      </td>
-    </tr>
+    <% @collection.each do |retailer|%>
+      <tr id="<%= spree_dom_id retailer %>" data-hook="admin_retailers_index_rows" class="<%= cycle('odd', 'even')%>">
+        <td class='retailer_name'><%=link_to retailer.name, object_url(retailer) %></td>
+        <td class='retailer_type'><%= retailer.retailer_type.nil? ? "n/a" : retailer.retailer_type.name %></td>
+        <td class='retailer_state'><%= retailer.state %></td>
+        <td class='retailer_email'><%= retailer.email %></td>
+        <td class='retailer_phone'><%= retailer.phone %></td>
+        <td data-hook="admin_retailers_index_row_actions" class="actions">
+          <%= link_to_edit retailer, :no_text => true %>
+          <%= link_to_delete retailer, :no_text => true %>
+        </td>
+      </tr>
     <% end %>
   </tbody>
 </table>
 
 <%= paginate @collection %>
 
+<% content_for :sidebar_title do %>
+  <%= Spree.t(:search) %>
+<% end %>
 
 <% content_for :sidebar do %>
-<div class="box">
-  <h3><%= t(:search) %></h3>
-
-  <%= search_form_for [:admin, @search] do |f| %>
-    <p>
-      <label><%= t '.retailer_type_id_equals' %></label><br />
-      <%= f.select :retailer_type_id_eq, Spree::RetailerType.to_options, { :include_blank => true, :selected => (params[:q][:retailer_type_id_eq] if params[:q]) } %>
-    </p>
-    <p>
-      <label><%= t '.name_contains' %></label><br />
-      <%= f.text_field :name_cont, :size => 25 %>
-    </p>
-    <p>
-      <label><%= t '.email_contains' %></label><br />
-      <%= f.text_field :email_cont, :size => 25 %>
-    </p>
-    <p>
-      <label><%= t '.country_contains' %></label><br />
-      <%= f.text_field :country_cont, :size => 25 %>
-    </p>
-    <p>
-      <label><%= t '.state_contains' %></label><br />
-      <%= f.text_field :state_cont, :size => 25 %>
-    </p>
-    <p><%= button t("search") %></p>
-  <% end %>
-</div>
+  <div class="box align-center" data-hook="admin_retailers_index_search">
+    <%= search_form_for [:admin, @search] do |f| %>
+      <div class="field">
+        <%= f.label Spree.t(:type) %> <br>
+        <%= f.select :retailer_type_id_eq, Spree::RetailerType.to_options, { :include_blank => true, :selected => (params[:q][:retailer_type_id_eq] if params[:q]) } %>
+      </div>
+      <div class="field">
+        <%= f.label Spree.t(:name) %> <br>
+        <%= f.text_field :name_cont, :class => 'fullwidth' %>
+      </div>
+      <div class="field">
+        <%= f.label Spree.t(:email) %> <br>
+        <%= f.text_field :email_cont, :class => 'fullwidth' %>
+      </div>
+      <div class="field">
+        <%= f.label Spree.t(:country) %> <br>
+        <%= f.text_field :country_cont, :class => 'fullwidth' %>
+      </div>
+      <div class="field">
+        <%= f.label Spree.t(:state) %> <br>
+        <%= f.text_field :state_cont, :class => 'fullwidth' %>
+      </div>
+      <div data-hook="admin_retailers_index_search_buttons">
+        <%= button Spree.t(:search), 'icon-search' %>
+      </div>
+    <% end %>
+  </div>
 <% end %>

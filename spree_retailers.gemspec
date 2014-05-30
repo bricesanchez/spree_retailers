@@ -13,8 +13,8 @@ Gem::Specification.new do |s|
   s.requirements << 'none'
 
 
-  s.add_dependency 'spree_core', '~> 1.3.5'
-  s.add_dependency 'geokit',     '~> 1.6.5'
+  s.add_dependency 'spree_core', '~> 2.0.0'
+  s.add_dependency 'geokit',     '~> 1.8.4'
 
   s.add_development_dependency 'capybara', '~> 2.0'
   s.add_development_dependency 'coffee-rails'
