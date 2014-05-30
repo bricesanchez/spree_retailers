@@ -1,6 +1,8 @@
-<%= render :partial => 'spree/admin/shared/configuration_menu' %>
+<% content_for :page_title do %>
+  <%= Spree.t(:edit_retailer_type) %>
+<% end %>
 
-<h1>Edit Retailer Type</h1>
+<%= render :partial => 'spree/admin/shared/retailer_sub_menu' %>
 
 <% if @retailer_type.try(:errors).present? %>
   <%= render 'spree/shared/error_messages', :target => @retailer_type %>
