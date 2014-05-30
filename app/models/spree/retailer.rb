@@ -1,5 +1,10 @@
 class Spree::Retailer < ActiveRecord::Base
-
+  acts_as_mappable :auto_geocode => true,
+                   :default_units => :miles,
+                   :default_formula => :sphere,
+                   :lat_column_name => :latitude,
+                   :lng_column_name => :longitude
+  
   attr_accessible :retailer_type_id, :name, :email, :phone, :address, :address2, :city, :country, :state, :zipcode, :url, :logo
   
   belongs_to :retailer_type, :class_name => "Spree::RetailerType"
