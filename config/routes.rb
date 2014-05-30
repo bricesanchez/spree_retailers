@@ -7,5 +7,4 @@ Spree::Core::Engine.routes.draw do
   end
 
   get '/retailers(/:retailer_type_id)' => 'retailers#index', :as => :retailer_type
-  
 end
