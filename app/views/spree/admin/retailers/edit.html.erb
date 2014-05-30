@@ -1,10 +1,19 @@
-<h1>Edit Retailer</h1>
+  <% content_for :page_title do %>
+    <%= Spree.t(:editing_retailer) %>
+  <% end %>
 
-<%= render "spree/shared/error_messages", :target => @retailer %>
+  <% content_for :page_actions do %>
+    <li>
+      <%= button_link_to Spree.t(:back), session[:return_to] || spree.admin_retailers_path, :icon => 'icon-arrow-left' %>
+    </li>
+  <% end %>
 
-<%= form_for([ :admin, @retailer ], :html => { :multipart => true }) do |f| %>
-  <%= render :partial => "form", :locals => { :f => f } %>
-  <p class="form-buttons">
-    <%= button t("update") %> <%= link_to t('cancel'), collection_url %>
-  </p>
-<% end %>
+  <%= render :partial => 'spree/admin/shared/retailer_sub_menu' %>
+  
+  <%= form_for [:admin, @retailer] do |f| %>
+	  <fieldset class="no-border-top">
+	    <%= render :partial => 'form', :locals => { :f => f } %>
+	    <%= render :partial => 'spree/admin/shared/edit_resource_links' %>
+	  </fieldset>
+  <% end %>
+    
