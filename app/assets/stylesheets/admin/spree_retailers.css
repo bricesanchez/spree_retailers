@@ -1,0 +1,11 @@
+/*
+ * require admin/spree_core
+*/
+
+span.inline-radio-group {
+	padding: 0px 8px;
+}
+
+div.local-stockists-search-form {
+	text-align: center;
+}
