@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = "spree_retailers"
-  s.version     = '1.1.0'
+  s.version     = '1.3.0'
   s.summary     = %q{Spree Retailers is a Spree extension for listing your company's retail stores on your web site.}
 
   s.authors     = ["Spencer Steffen", 'Michael Bianco']
