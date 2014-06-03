@@ -14,19 +14,17 @@
 <table class="index" id="listing_retailers" data-hook>
   <colgroup>
     <col style="width: 30%">
+    <col style="width: 25%">
+    <col style="width: 20%">
     <col style="width: 10%">
-    <col style="width: 15%">
-    <col style="width: 15%">
-    <col style="width: 15%">
     <col style="width: 15%">
   </colgroup>
   <thead>
     <tr data-hook="admin_retailers_index_headers">
       <th><%= sort_link @search,:name, Spree.t(:name), {}, {:title => 'retailer_name'} %></th>
-      <th><%= sort_link @search,:retailer_type, Spree.t(:retailer_type), {}, {:title => 'retailer_type'} %></th>
+      <th><%= sort_link @search,:city, Spree.t(:city), {}, {:title => 'city'} %></th>
       <th><%= sort_link @search,:state, Spree.t(:state), {}, {:title => 'state'} %></th>
-      <th><%= sort_link @search,:email, Spree.t(:email), {}, {:title => 'email'} %></th>
-      <th><%= sort_link @search,:phone, Spree.t(:phone), {}, {:title => 'phone'} %></th>
+      <th><%= sort_link @search,:retailer_type, Spree.t(:retailer_type), {}, {:title => 'retailer_type'} %></th>
       <th data-hook="admin_retailers_index_header_actions" class="actions"></th>
     </tr>
   </thead>
@@ -34,10 +32,9 @@
     <% @collection.each do |retailer|%>
       <tr id="<%= spree_dom_id retailer %>" data-hook="admin_retailers_index_rows" class="<%= cycle('odd', 'even')%>">
         <td class='retailer_name'><%=link_to retailer.name, object_url(retailer) %></td>
-        <td class='retailer_type'><%= retailer.retailer_type.nil? ? "n/a" : retailer.retailer_type.name %></td>
+        <td class='retailer_city'><%= retailer.city %></td>
         <td class='retailer_state'><%= retailer.state %></td>
-        <td class='retailer_email'><%= retailer.email %></td>
-        <td class='retailer_phone'><%= retailer.phone %></td>
+        <td class='retailer_type'><%= retailer.retailer_type.nil? ? "n/a" : retailer.retailer_type.name %></td>
         <td data-hook="admin_retailers_index_row_actions" class="actions">
           <%= link_to_edit retailer, :no_text => true %>
           <%= link_to_delete retailer, :no_text => true %>

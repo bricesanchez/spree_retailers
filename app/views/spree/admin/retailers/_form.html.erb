@@ -12,25 +12,7 @@
 		  <%= error_message_on :retailer, :retailer_type_id %>
 		<% end %>
 	  
-		<%= f.field_container :phone do %>
-		  <%= f.label :phone, "Phone" %><br />
-		  <%= f.text_field :phone, :class => 'text' %>
-		  <%= error_message_on :retailer, :phone %>
-		<% end %>
-	
-		<%= f.field_container :email do %>
-		  <%= f.label :email, "Email" %><br />
-		  <%= f.email_field :email, :class => 'text' %>
-		  <%= error_message_on :retailer, :email %>
-		<% end %>
-		
-		<%= f.field_container :url do %>
-		  <%= f.label :url, "Website URL" %><br />
-		  <%= f.text_field :url, :class => 'text' %>
-		  <%= error_message_on :retailer, :url %>
-		<% end %>
-	
-		<% if @retailer.has_logo? %>
+	  <% if @retailer.has_logo? %>
 		  <%= f.field_container :logo do %>
 		    <p class="current-logo">
 		      <%= label_tag 'current_logo', "Current Logo:" %><br />
@@ -46,6 +28,24 @@
 		    <%= f.file_field :logo, :class => 'file' %>
 		    <%= error_message_on :retailer, :logo %>
 		  <% end %>
+		<% end %>
+		
+		<%= f.field_container :phone do %>
+		  <%= f.label :phone, "Phone" %><br />
+		  <%= f.text_field :phone, :class => 'text' %>
+		  <%= error_message_on :retailer, :phone %>
+		<% end %>
+	
+		<%= f.field_container :email do %>
+		  <%= f.label :email, "Email" %><br />
+		  <%= f.email_field :email, :class => 'text' %>
+		  <%= error_message_on :retailer, :email %>
+		<% end %>
+		
+		<%= f.field_container :url do %>
+		  <%= f.label :url, "Website URL" %><br />
+		  <%= f.text_field :url, :class => 'text', :size => '50' %>
+		  <%= error_message_on :retailer, :url %>
 		<% end %>
   </div>  
     
