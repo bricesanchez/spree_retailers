@@ -1,5 +1,16 @@
 # Spree Retailers [![Build Status](https://secure.travis-ci.org/citrus/spree_retailers.png)](http://travis-ci.org/citrus/spree_retailers)
 
+This is a fork of the spree_retailers gem to make it work nicely with Spree version 2. I have also made the following changes:
+
+1. Changed the columns displayed in list view to name, city, state and type
+
+2. Bundled admin functionality using sub-menus under the retailers tab
+
+3. Added a find local stockist feature.
+
+
+------------------------------------------------------------------------------
+
 Spree Retailers is a Spree extension for listing your company's retail stores on your web site.
 
 
@@ -9,7 +20,10 @@ Installation
 
 As usual, add 'spree_retailers' to your Gemfile and run bundle install:
   
-```ruby  
+```ruby
+# Spree 2.0.x
+gem 'spree_retailers', :git => 'git://github.com/davidcrees/spree_retailers.git'
+
 # Spree 1.1.x
 gem 'spree_retailers', :git => 'git://github.com/citrus/spree_retailers.git'
 
