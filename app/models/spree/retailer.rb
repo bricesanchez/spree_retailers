@@ -1,6 +1,5 @@
 class Spree::Retailer < ActiveRecord::Base
-  acts_as_mappable :auto_geocode => true,
-                   :default_units => :miles,
+  acts_as_mappable :default_units => :miles,
                    :default_formula => :sphere,
                    :lat_column_name => :latitude,
                    :lng_column_name => :longitude
