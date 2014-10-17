@@ -5,12 +5,12 @@ class Spree::RetailersController < Spree::BaseController
   def index
     # TODO right now the index doesn't categorize the different type of retailers well
     # it's really messy; don't have time to fix it right now
-    
+
     if params[:retailer_type_id].present?
       @retailer_type = Spree::RetailerType.find_by_permalink!(params[:retailer_type_id])
       @retailers = @retailer_type.retailers
     else
-      @retailers = Spree::Retailer.scoped
+      @retailers = Spree::Retailer.all
     end
 
     @retailer_types = Spree::RetailerType.order(:name).all
@@ -24,7 +24,7 @@ class Spree::RetailersController < Spree::BaseController
   end
 
   private
-  
+
   def disable_public_retailers_pages
     disable_public_retailers_pages = Spree::Retailers::Config.disable_public_retailers_pages
     render_404 if disable_public_retailers_pages  # Don't want retailer listings to be publicly viewable
