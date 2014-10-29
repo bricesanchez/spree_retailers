@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.requirements << 'none'
 
 
-  s.add_dependency 'spree_core', '~> 2.3.4'
+  s.add_dependency 'spree_core', '>= 2.3.4'
   s.add_dependency 'geokit',     '~> 1.9.0'
   s.add_dependency 'geokit-rails', '~> 2.0.1'
 
